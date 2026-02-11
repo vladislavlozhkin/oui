@@ -1,8 +1,31 @@
 /**
  * OpenCode integration module.
  *
- * This module provides types and transformers for working with the OpenCode SDK.
+ * This module provides the adapter layer for bridging the OpenCode SDK
+ * to the internal UI types used by React components and Zustand stores.
+ *
+ * Public API:
+ * - createOpencodeAdapter() — main entry point for UI layer
+ * - createEventAdapter() — lower-level SSE event mapping
+ * - transform*() — SDK-to-internal type converters
+ * - Internal*  — UI-optimized type definitions
  */
+
+export type {
+	ContinueSessionOptions,
+	FileContent,
+	ModelSelection,
+	OpencodeAdapter,
+	OpencodeAdapterConfig,
+	ProviderInfo,
+	ProviderListResult,
+	TextMatch,
+} from './client'
+// Client Adapter (main entry point)
+export { createOpencodeAdapter, OpencodeError } from './client'
+
+// Event Adapter
+export { createEventAdapter } from './events'
 
 // Transformers
 export {
@@ -14,6 +37,7 @@ export {
 	transformSession,
 	transformSessionStatus,
 } from './transformers'
+
 // Types
 export type {
 	InternalAgentMessage,
